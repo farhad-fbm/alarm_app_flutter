@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/common_widgets/custom_location_button.dart';
 import 'package:my_app/constants/app_colors.dart';
 
 class SetLocation extends StatelessWidget {
@@ -30,53 +31,15 @@ class SetLocation extends StatelessWidget {
               ),
 
               Spacer(),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Handle location permission request
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Use Current Location",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      SizedBox(width: 8),
-                      Icon(Icons.location_on, color: Colors.white, size: 20),
-                    ],
-                  ),
-                ),
+              CustomLocationButton(
+                onClick: () {
+                  // Handle location permission request
+                },
+                btnText: "Use Current Location",
+                icon: Icons.location_on,
               ),
               SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Handle location permission request
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: Text("Home", style: TextStyle(color: Colors.white)),
-                ),
-              ),
+              CustomLocationButton(btnText: 'Home'),
             ],
           ),
         ),
