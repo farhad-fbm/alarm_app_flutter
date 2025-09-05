@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/screen.dart';
 import 'package:my_app/third_screen.dart';
 
 class Screen2 extends StatelessWidget {
@@ -6,90 +7,13 @@ class Screen2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Card(
-              margin: EdgeInsets.all(0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                ),
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: Image.asset(
-                "assets/effortless.gif",
-                width: MediaQuery.of(context).size.width * 1,
-                height: MediaQuery.of(context).size.height * 0.55,
-                fit: BoxFit.cover,
-              ),
-            ),
-            SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                children: [
-                  Text(
-                    'Effortless and Automatic',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.white,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    'No need to set alarms manually. Wakey calculates the sunset time for your location and alerts you on time',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 50),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 1,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) =>
-                          Screen3(),
-                      transitionsBuilder:
-                          (context, animation, secondaryAnimation, child) {
-                            return FadeTransition(
-                              opacity: animation,
-                              child: child,
-                            );
-                          },
-                      transitionDuration: Duration(milliseconds: 300),
-                    ),
-                  );
-
-                  // Navigator.pop(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(6),
-                  backgroundColor: Colors.deepPurple,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(0),
-                  ),
-                ),
-                child: Text("NEXT", style: TextStyle(color: Colors.white)),
-              ),
-            ),
-          ],
-        ),
-      ),
+    return InfoScreen(
+      imagePath: "assets/effortless.gif",
+      title:  'Effortless and Automatic',
+      description:
+         'No need to set alarms manually. Wakey calculates the sunset time for your location and alerts you on time',
+      nextScreen: Screen3(),
+      currentPage: 1,
     );
   }
 }
