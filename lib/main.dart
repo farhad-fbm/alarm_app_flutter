@@ -40,22 +40,38 @@ class HomeWidget extends StatelessWidget {
               child: Image.asset(
                 "assets/sync_rhythm.gif",
                 width: MediaQuery.of(context).size.width * 1,
-                height: MediaQuery.of(context).size.height * 0.5,
+                height: MediaQuery.of(context).size.height * 0.55,
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 26),
-            Text(
-              'Welcome to Daily Notes!',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+            SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+                  Text(
+                    'Sync with Nature’s Rhythm',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  SizedBox(height: 16),
+                  Text(
+                    'Experience a peaceful transition into the evening with an alarm that aligns with the sunset." Your perfect reminder, always 15 minutes before sundown',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ],
               ),
-              textAlign: TextAlign.center,
             ),
-            SizedBox(height: 26),
-
+            SizedBox(height: 50),
             SizedBox(
               width: MediaQuery.of(context).size.width * 1,
               child: ElevatedButton(
