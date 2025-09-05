@@ -6,6 +6,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('locationDB');
+  await Hive.openBox('alarmsDB');
   runApp(const MyApp());
 }
 

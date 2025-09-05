@@ -4,6 +4,7 @@ import 'package:my_app/constants/app_colors.dart';
 import 'package:my_app/features/alarms/screens/alarm_screen.dart';
 // import 'package:my_app/features/alarms/screens/alarm_screen.dart';
 import 'package:my_app/helpers/location_helper.dart';
+import 'package:my_app/helpers/navigation_helper.dart';
 
 class SetLocation extends StatefulWidget {
   const SetLocation({super.key});
@@ -37,11 +38,11 @@ class _SetLocationState extends State<SetLocation> {
               SizedBox(height: 32),
               Image.asset(
                 'assets/morning_location.png',
-                height: 300,
+                height: 300,   
                 fit: BoxFit.cover,
               ),
 
-              Spacer(),
+      Spacer(),   
               // ---------------------------------------------------
               if (_status != null)
                 Text(_status!, style: TextStyle(color: Colors.white70)),
@@ -60,10 +61,7 @@ class _SetLocationState extends State<SetLocation> {
                     if (!mounted) return;
                     if (result != null &&
                         !result.toLowerCase().contains("denied")) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (_) => AlarmScreen()),
-                      );
+                      navigationWithFade(context, const AlarmScreen());
                     }
                   } catch (e) {
                     setState(() {
@@ -75,8 +73,12 @@ class _SetLocationState extends State<SetLocation> {
                 btnText: "Use Current Location",
                 icon: Icons.location_on,
               ),
-              if (_isLoading) CircularProgressIndicator(), SizedBox(height: 16),
-              CustomLocationButton(btnText: 'Home'),
+              if (_isLoading) CircularProgressIndicator(),
+              SizedBox(height: 16),
+              CustomLocationButton(
+                btnText: 'Home',
+                onClick: () => navigationWithFade(context, const AlarmScreen()),
+              ),
             ],
           ),
         ),
