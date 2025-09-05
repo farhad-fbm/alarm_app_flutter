@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/screen.dart';
+import 'package:my_app/features/onboarding/screens/info_screen.dart';
 import 'package:my_app/third_screen.dart';
 
 class Screen2 extends StatelessWidget {
