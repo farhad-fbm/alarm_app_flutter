@@ -53,7 +53,8 @@ class LocationHelper {
   }
 
   static String? getSavedLocation() {
-    var box = Hive.box('LocationDB');
-    return box.get('location');
+    var box = Hive.box('locationDB'); 
+    return box.get('location')?['address'];
+    
   }
 }
