@@ -1,25 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/second_screen.dart';
+import 'package:my_app/main.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Alarm App",
-      home: Screen1(),
-    );
-  }
-}
-
-class Screen1 extends StatelessWidget {
-  const Screen1({super.key});
+class Screen3 extends StatelessWidget {
+  const Screen3({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +21,7 @@ class Screen1 extends StatelessWidget {
               ),
               clipBehavior: Clip.antiAlias,
               child: Image.asset(
-                "assets/sync_rhythm.gif",
+                "assets/relax.gif",
                 width: MediaQuery.of(context).size.width * 1,
                 height: MediaQuery.of(context).size.height * 0.55,
                 fit: BoxFit.cover,
@@ -50,7 +33,7 @@ class Screen1 extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'Sync with Nature’s Rhythm',
+                    'Effortless and Automatic',
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w900,
@@ -60,8 +43,7 @@ class Screen1 extends StatelessWidget {
                   ),
                   SizedBox(height: 16),
                   Text(
-                    //
-                    'Experience a peaceful transition into the evening with an alarm that aligns with the sunset."Your perfect reminder, always 15 minutes before sundown',
+                    'No need to set alarms manually. Wakey calculates the sunset time for your location and alerts you on time',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -81,7 +63,7 @@ class Screen1 extends StatelessWidget {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) =>
-                          Screen2(),
+                          Screen1(),
                       transitionsBuilder:
                           (context, animation, secondaryAnimation, child) {
                             // Fade transition example
@@ -93,7 +75,6 @@ class Screen1 extends StatelessWidget {
                       transitionDuration: Duration(milliseconds: 300), // speed
                     ),
                   );
-
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(6),
