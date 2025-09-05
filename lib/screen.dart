@@ -32,11 +32,29 @@ class InfoScreen extends StatelessWidget {
                 ),
               ),
               clipBehavior: Clip.antiAlias,
-              child: Image.asset(
-                imagePath,
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.55,
-                fit: BoxFit.cover,
+              child: Stack(
+                children: [
+                  Image.asset(
+                    imagePath,
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.55,
+                    fit: BoxFit.cover,
+                  ),
+                  // Skip button positioned absolutely
+                  Positioned(
+                    top: 24, 
+                    right: 16,
+                    child: TextButton(
+                      onPressed: () {
+                        // handle skip action
+                      },
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.white,
+                      ),
+                      child: Text("Skip", style: TextStyle(fontSize:20),),
+                    ),
+                  ),
+                ],
               ),
             ),
             SizedBox(height: 16),
@@ -90,7 +108,7 @@ class InfoScreen extends StatelessWidget {
                 ),
               ),
             ),
-             SizedBox(height: 10),
+            SizedBox(height: 10),
             // Spacer(),
             SizedBox(
               width: double.infinity,
