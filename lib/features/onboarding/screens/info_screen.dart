@@ -3,7 +3,7 @@ import 'package:my_app/common_widgets/custom_indicator.dart';
 import 'package:my_app/constants/app_colors.dart';
 import 'package:my_app/features/onboarding/widgets/info_card.dart';
 import 'package:my_app/features/onboarding/widgets/info_content.dart';
-import 'package:my_app/location.dart';
+import 'package:my_app/features/location/screens/location.dart';
 import 'package:my_app/helpers/navigation_helper.dart';
 
 class InfoScreen extends StatelessWidget {
