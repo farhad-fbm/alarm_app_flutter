@@ -28,11 +28,14 @@ A Flutter alarm app with location-based notifications, customizable alarms, and 
 ```bash
 git clone https://github.com/farhad-fbm/alarm_app_flutter.git
 cd alarm_app_flutter
-flutter pub get
 
+
+## Install Dependencies
+flutter pub get
+```
 
   
----### Screenshots
+### Screenshots
 **Splash Screen**  
 ![Home Screen](assets/screenshots/1.png)
 
