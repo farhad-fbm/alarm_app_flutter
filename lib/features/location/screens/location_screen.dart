@@ -23,26 +23,26 @@ class _SetLocationState extends State<SetLocation> {
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.fromLTRB(16, 62, 16, 16),
           child: Column(
             children: [
               Text(
                 'Welcome! Your Personalized Alarm',
-                style: TextStyle(fontSize: 24, color: Colors.white),
+                style: TextStyle(fontSize: 28, color: AppColors.txt),
               ),
               SizedBox(height: 16),
               Text(
                 'Allow us to sync your sunset alarm based on your location.',
                 style: TextStyle(fontSize: 16, color: Colors.white70),
               ),
-              SizedBox(height: 32),
+              SizedBox(height: 48),
               Image.asset(
                 'assets/morning_location.png',
-                height: 300,   
+                height: 300,
                 fit: BoxFit.cover,
               ),
 
-      Spacer(),   
+              Spacer(),
               // ---------------------------------------------------
               if (_status != null)
                 Text(_status!, style: TextStyle(color: Colors.white70)),

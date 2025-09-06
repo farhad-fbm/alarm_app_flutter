@@ -156,7 +156,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
           children: [
             if (savedLocation != null) ...[
               Padding(
-                padding: const EdgeInsets.all(40.0),
+                padding: const EdgeInsets.fromLTRB(60.0, 100.0, 60.0, 24.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -172,7 +172,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
                         Expanded(child: Text(savedLocation!)),
                       ],
                     ),
-                    SizedBox(height: 16),
+                    SizedBox(height: 24),
                     CustomLocationButton(
                       onClick: pickDateTime,
                       btnText: 'Add Alarm',
@@ -183,7 +183,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
             ],
             SizedBox(height: 16),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 "Alarms",
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -193,24 +193,73 @@ class _AlarmScreenState extends State<AlarmScreen> {
               child: ListView.builder(
                 itemCount: alarms.length,
                 itemBuilder: (context, index) {
-                  // DateTime alarmTime = DateTime.parse(alarms[index].value);
                   DateTime alarmTime = alarms[index];
+                  bool isEnabled = true;
                   return Card(
-                    color: Colors.grey[800],
-                    margin: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                    child: ListTile(
-                      title: Text(
-                        DateFormat.jm().format(alarmTime),
-                        style: TextStyle(fontSize: 18),
+                    color: AppColors.btnBg,
+                    margin: const EdgeInsets.symmetric(
+                      vertical: 4,
+                      horizontal: 16,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
                       ),
-                      subtitle: Text(
-                        DateFormat('EEE dd MMM yyyy').format(alarmTime),
-                      ),
-                      trailing: Switch(
-                        value: true,
-                        onChanged: (val) {
-                          // Optional: toggle alarm on/off
-                        },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // Time & Date in a Row
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  DateFormat.jm().format(alarmTime),
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: AppColors.txt,
+                                  ),
+                                ),
+
+                                Text(
+                                  DateFormat(
+                                    'EEE dd MMM yyyy',
+                                  ).format(alarmTime),
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: AppColors.txt,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          // Toggle switch
+                          StatefulBuilder(
+                            builder: (context, setSwitchState) => Switch(
+                              value: isEnabled,
+                              onChanged: (val) {
+                                setSwitchState(() => isEnabled = val);
+
+                                if (val) {
+                                } else {}
+                              },
+                              activeThumbColor: AppColors.primary,
+                              thumbColor:
+                                  WidgetStateProperty.resolveWith<Color>((
+                                    states,
+                                  ) {
+                                    if (states.contains(
+                                      WidgetState.selected,
+                                    )) {
+                                      return Colors.white;
+                                    }
+                                    return Colors.grey;
+                                  }),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   );
