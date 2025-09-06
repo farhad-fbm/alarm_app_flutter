@@ -35,9 +35,10 @@ cd alarm_app_flutter
 
 ```bash
 flutter pub get
-```bash
 
 
+  
+---
 ### Screenshots
 **Splash Screen**  
 ![Home Screen](assets/screenshots/1.png)
