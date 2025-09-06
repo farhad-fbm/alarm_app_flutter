@@ -32,6 +32,33 @@ cd alarm_app_flutter
 flutter pub get
 ```
 
+## Tools & Packages Used
+
+| Package | Purpose |
+|---------|---------|
+| `flutter` | Flutter SDK and framework for building the app UI |
+| `hive` & `hive_flutter` | Local persistent storage and easy integration with Flutter |
+| `geolocator` | Access device GPS location |
+| `geocoding` | Convert coordinates (lat/lng) into human-readable addresses |
+| `flutter_local_notifications` | Schedule and display local notifications/alarms |
+| `intl` | Format and manipulate dates and times |
+| `timezone` | Handle alarms correctly across different time zones |
+| `permission_handler` | Request runtime permissions like location and notifications |
+| `flutter_launcher_icons` | Generate app launcher icons for Android and iOS |
+| `flutter_native_splash` | Create custom splash screens for Android and iOS |
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 ### Screenshots
 **Splash Screen**  **Onboard Screen**  
