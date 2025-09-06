@@ -8,9 +8,7 @@ A Flutter alarm app with location-based notifications, customizable alarms, and 
 - Set alarms with local notifications.  
 - Location-based features using GPS.  
 - Persistent storage using Hive database.  
-- Time zone support for alarms across regions.  
-- Permissions handling for smooth operation.  
-- Custom icons and splash screen for better app experience.  
+- Time zone support for alarms across regions.   
 
 ---
 
@@ -37,11 +35,14 @@ flutter pub get
   
 ### Screenshots
 **Splash Screen**  
-![Home Screen](assets/screenshots/1.png)
-
 **Onboard Screen**  
-![Onboard Screen](assets/screenshots/2.png)
-![Onboard Screen](assets/screenshots/3.png)
+
+<p float="left">
+  <img src="assets/screenshots/1.png" width="200" />
+  <img src="assets/screenshots/2.png" width="200" />
+  <img src="assets/screenshots/3.png" width="200" />
+</p>
+
 
 **Location Setup Screen**  
 ![Location Screen](assets/screenshots/4.png)
