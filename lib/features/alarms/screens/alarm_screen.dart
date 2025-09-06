@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
@@ -27,7 +29,6 @@ class _AlarmScreenState extends State<AlarmScreen> {
   // Use a local dummy list instead of Hive
   List<DateTime> alarms = [
     DateTime.now().add(Duration(minutes: 2)),
-    DateTime.now().add(Duration(minutes: 4)),
   ];
 
   @override
@@ -52,12 +53,8 @@ class _AlarmScreenState extends State<AlarmScreen> {
     var initSettings = InitializationSettings(android: androidInit);
     flutterLocalNotificationsPlugin.initialize(initSettings);
 
-    // Request notification permission
-    requestNotificationPermission().then((_) async {
-      // Schedule a test notification 5 seconds from now
-      await scheduleAlarm(DateTime.now().add(Duration(seconds: 5)));
-    });
-
+  
+    requestNotificationPermission();
     savedLocation = LocationHelper.getSavedLocation();
     // locationBox = Hive.box('locationDB');
     // alarmsBox = Hive.box('alarmsDB');
@@ -94,7 +91,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
         // matchDateTimeComponents: DateTimeComponents.dateAndTime,
       );
     } catch (e) {
-      print("Error scheduling notification: $e");
+      // print("Error scheduling notification: $e");
     }
   }
 
@@ -250,9 +247,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
                                   WidgetStateProperty.resolveWith<Color>((
                                     states,
                                   ) {
-                                    if (states.contains(
-                                      WidgetState.selected,
-                                    )) {
+                                    if (states.contains(WidgetState.selected)) {
                                       return Colors.white;
                                     }
                                     return Colors.grey;

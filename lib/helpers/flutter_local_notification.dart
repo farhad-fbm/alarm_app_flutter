@@ -6,12 +6,11 @@ Future<void> requestNotificationPermission() async {
   final status = await Permission.notification.request();
 
   if (status.isGranted) {
-    print("Notification permission granted!");
+    // print("Notification permission granted!");
   } else if (status.isDenied) {
-    print("Notification permission denied!");
+    // print("Notification permission denied!");
   } else if (status.isPermanentlyDenied) {
-    print("Permission permanently denied. Open app settings to allow.");
-    // You can open app settings if needed:
+    // print("Permission permanently denied. Open app settings to allow.");
     // await openAppSettings();
   }
 }
