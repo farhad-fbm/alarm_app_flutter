@@ -3,7 +3,6 @@
 A Flutter alarm app with location-based notifications, customizable alarms, and a sleek, interactive UI.
 
 ---
-![Onboard Screen](assets/screenshots/2.png)
 ## Features
 
 - Set alarms with local notifications.  
@@ -29,17 +28,11 @@ A Flutter alarm app with location-based notifications, customizable alarms, and 
 ```bash
 git clone https://github.com/farhad-fbm/alarm_app_flutter.git
 cd alarm_app_flutter
-
-
-## Install Dependencies
-
-```bash
 flutter pub get
 
 
   
----
-### Screenshots
+---### Screenshots
 **Splash Screen**  
 ![Home Screen](assets/screenshots/1.png)
 
