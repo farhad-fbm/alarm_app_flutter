@@ -35,7 +35,7 @@ cd alarm_app_flutter
 
 ```bash
 flutter pub get
-
+```bash
 
 
 ### Screenshots
