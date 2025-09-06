@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:my_app/constants/app_colors.dart';
 
 class CustomLocationButton extends StatelessWidget {
   final VoidCallback? onClick;
@@ -22,7 +23,7 @@ class CustomLocationButton extends StatelessWidget {
           onClick?.call();
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.grey,
+          backgroundColor: AppColors.btnBg,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           padding: EdgeInsets.symmetric(vertical: 16),
         ),

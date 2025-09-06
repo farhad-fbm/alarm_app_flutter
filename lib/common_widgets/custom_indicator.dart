@@ -24,7 +24,7 @@ class CustomIndicator extends StatelessWidget {
           height: 8,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: idx == currentPage ? AppColors.primary : AppColors.white,
+            color: idx == currentPage ? AppColors.primary : AppColors.txt,
           ),
         ),
       ),

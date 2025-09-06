@@ -3,6 +3,8 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
+import 'package:my_app/common_widgets/custom_location_button.dart';
+import 'package:my_app/constants/app_colors.dart';
 import 'package:my_app/helpers/location_helper.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -19,8 +21,13 @@ class _AlarmScreenState extends State<AlarmScreen> {
       FlutterLocalNotificationsPlugin();
 
   String? savedLocation;
-  late Box locationBox ;
-  late Box alarmsBox ;
+  // late Box locationBox;
+  // late Box alarmsBox;
+  // Use a local dummy list instead of Hive
+  List<DateTime> alarms = [
+    DateTime.now().add(Duration(minutes: 1)),
+    DateTime.now().add(Duration(minutes: 5)),
+  ];
 
   @override
   void initState() {
@@ -34,35 +41,44 @@ class _AlarmScreenState extends State<AlarmScreen> {
 
     // Load saved location
     savedLocation = LocationHelper.getSavedLocation();
-    locationBox = Hive.box('locationDB');
-    alarmsBox = Hive.box('alarmsDB');
+    // locationBox = Hive.box('locationDB');
+    // alarmsBox = Hive.box('alarmsDB');
   }
 
   Future<void> scheduleAlarm(DateTime dateTime) async {
+  // First, update the list immediately
+  setState(() {
+    alarms.add(dateTime);
+    alarms.sort((a, b) => a.compareTo(b));
+  });
+
+  try {
     int id = DateTime.now().millisecondsSinceEpoch.remainder(100000);
+
+    var androidDetails = AndroidNotificationDetails(
+      'alarm_channel',  //channer id
+      'Alarms', //channel name
+      channelDescription: 'Channel for alarms',
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+    );
+
+    var notificationDetails = NotificationDetails(android: androidDetails);
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
       id,
       'Alarm',
       'It\'s time!',
-      tz.TZDateTime.from(dateTime, tz.local), // Convert to TZDateTime
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'alarm_channel',
-          'Alarms',
-          channelDescription: 'Channel for alarms',
-          importance: Importance.max,
-          priority: Priority.high,
-        ),
-      ),
-      androidScheduleMode:
-          AndroidScheduleMode.exactAllowWhileIdle, // Ensure exact timing
+      tz.TZDateTime.from(dateTime, tz.local),
+      notificationDetails,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       matchDateTimeComponents: DateTimeComponents.dateAndTime,
     );
-
-    alarmsBox.put(id, dateTime.toIso8601String());
-    setState(() {});
+  } catch (e) {
+    print("Error scheduling notification: $e");
   }
+}
 
   Future<void> pickDateTime() async {
     DateTime? date = await showDatePicker(
@@ -86,48 +102,103 @@ class _AlarmScreenState extends State<AlarmScreen> {
       time.hour,
       time.minute,
     );
-    scheduleAlarm(dateTime);
+    await scheduleAlarm(dateTime);
+    // Optionally, ensure UI updates immediately
+    if (mounted) {
+      setState(() {
+        // Already added in scheduleAlarm, so no need to add again
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    List<MapEntry> alarms = alarmsBox.toMap().entries.toList();
-    alarms.sort(
-      (a, b) => DateTime.parse(a.value).compareTo(DateTime.parse(b.value)),
-    );
+    // List<MapEntry> alarms = alarmsBox.toMap().entries.toList();
+    // alarms.sort(
+    //   (a, b) => DateTime.parse(a.value).compareTo(DateTime.parse(b.value)),
+    // );
 
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      backgroundColor: AppColors.background,
+      body: DefaultTextStyle(
+        style: const TextStyle(color: AppColors.txt),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (savedLocation != null) ...[
-              Text(
-                "Selected Location",
+              Padding(
+                padding: const EdgeInsets.all(40.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Selected Location",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Icon(Icons.location_on, color: Colors.white70),
+                        SizedBox(width: 8),
+                        Expanded(child: Text(savedLocation!)),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    CustomLocationButton(
+                      onClick: pickDateTime,
+                      btnText: 'Add Alarm',
+                    ),
+                    // ElevatedButton(
+                    //   onPressed: () async {
+                    //     DateTime? date = await showDatePicker(
+                    //       context: context,
+                    //       initialDate: DateTime.now(),
+                    //       firstDate: DateTime.now(),
+                    //       lastDate: DateTime(2100),
+                    //     );
+                    //     if (date == null) return;
+
+                    //     TimeOfDay? time = await showTimePicker(
+                    //       context: context,
+                    //       initialTime: TimeOfDay.now(),
+                    //     );
+                    //     if (time == null) return;
+
+                    //     DateTime dateTime = DateTime(
+                    //       date.year,
+                    //       date.month,
+                    //       date.day,
+                    //       time.hour,
+                    //       time.minute,
+                    //     );
+
+                    //     // Schedule alarm and add to list
+                    //     await scheduleAlarm(dateTime);
+                    //   },
+                    //   child: Text("Add Alarm"),
+                    // ),
+                
+                  ],
+                ),
+              ),
+            ],
+            SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                "Alarms",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 8),
-              Row(
-                children: [
-                  Icon(Icons.location_on),
-                  SizedBox(width: 8),
-                  Expanded(child: Text(savedLocation!)),
-                ],
-              ),
-              SizedBox(height: 16),
-            ],
-            ElevatedButton(onPressed: pickDateTime, child: Text('Add Alarm')),
-            SizedBox(height: 16),
-            Text("Alarms", style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
             Expanded(
               child: ListView.builder(
                 itemCount: alarms.length,
                 itemBuilder: (context, index) {
-                  DateTime alarmTime = DateTime.parse(alarms[index].value);
+                  // DateTime alarmTime = DateTime.parse(alarms[index].value);
+                  DateTime alarmTime = alarms[index];
                   return Card(
                     color: Colors.grey[800],
-                    margin: EdgeInsets.symmetric(vertical: 4),
+                    margin: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                     child: ListTile(
                       title: Text(
                         DateFormat.jm().format(alarmTime),

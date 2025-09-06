@@ -39,12 +39,8 @@ class LocationHelper {
           '${place.locality}, ${place.administrativeArea}, ${place.country}';
 
       // Save to Hive
-      var box = Hive.box('locationDB');
-      await box.put('location', {
-        // 'latitude': position.latitude,
-        // 'longitude': position.longitude,
-        'address': address,
-      });
+      var locationBox = Hive.box('locationDB');
+      await locationBox.put('location', {'address': address});
 
       return address; // Success
     } else {
@@ -53,8 +49,7 @@ class LocationHelper {
   }
 
   static String? getSavedLocation() {
-    var box = Hive.box('locationDB'); 
+    var box = Hive.box('locationDB');
     return box.get('location')?['address'];
-    
   }
 }
