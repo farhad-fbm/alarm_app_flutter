@@ -34,8 +34,7 @@ flutter pub get
 
   
 ### Screenshots
-**Splash Screen**  
-**Onboard Screen**  
+**Splash Screen**  **Onboard Screen**  
 
 <p float="left">
   <img src="assets/screenshots/1.png" width="200" />
@@ -45,11 +44,17 @@ flutter pub get
 
 
 **Location Setup Screen**  
-![Location Screen](assets/screenshots/4.png)
-![Location Screen](assets/screenshots/5.png)
+<p float="left">
+  <img src="assets/screenshots/4.png" width="200" />
+  <img src="assets/screenshots/5.png" width="200" />
+</p>
+
 
 **Alarm Setup Screen**  
-![Alarm Screen](assets/screenshots/6.png)
-![Alarm Screen](assets/screenshots/7.png)
-![Alarm Screen](assets/screenshots/8.png)
-![Alarm Screen](assets/screenshots/9.png)
+<p float="left">
+  <img src="assets/screenshots/6.png" width="200" />
+  <img src="assets/screenshots/7.png" width="200" />
+  <img src="assets/screenshots/8.png" width="200" />
+  <img src="assets/screenshots/9.png" width="200" />
+</p>
+
