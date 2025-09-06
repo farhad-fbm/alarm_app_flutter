@@ -3,7 +3,7 @@
 A Flutter alarm app with location-based notifications, customizable alarms, and a sleek, interactive UI.
 
 ---
-
+![Onboard Screen](assets/screenshots/2.png)
 ## Features
 
 - Set alarms with local notifications.  
