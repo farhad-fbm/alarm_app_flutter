@@ -8,7 +8,6 @@ A Flutter alarm app with location-based notifications, customizable alarms, and 
 - Set alarms with local notifications.  
 - Location-based features using GPS.  
 - Persistent storage using Hive database.  
-- Time zone support for alarms across regions.   
 
 ---
 
